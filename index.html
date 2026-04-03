@@ -1,9 +1,669 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="refresh" content="0; url=https://heavenly-limburger-429.notion.site/Sabun-Dhital-Data-Analyst-b6d274bc1711834a971d81265d26fa10">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sabun Dhital | Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #f8f8f6;
+      --ink:     #0d0d0c;
+      --sub:     #5a5a56;
+      --rule:    #e0e0db;
+
+      --green:   #1a7a4a;   /* strong emerald */
+      --orange:  #d45a1a;   /* vivid terracotta */
+      --blue:    #2453a8;   /* bold cobalt */
+      --purple:  #6b32b8;   /* rich violet */
+
+      --green-bg:  #e4f5ec;
+      --orange-bg: #fdeee5;
+      --blue-bg:   #e5ecf8;
+      --purple-bg: #f0eafa;
+
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans:  'Geist', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 3rem; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--ink);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: background .3s;
+    }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 58px; }
+    .nav-name {
+      font-family: var(--serif); font-size: 1.1rem;
+      color: #fff; letter-spacing: -.01em;
+    }
+    .nav-name span { color: #4dd68a; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: .72rem; font-weight: 400; color: rgba(255,255,255,.55);
+      letter-spacing: .06em; text-transform: uppercase; transition: color .2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--green) !important; color: #fff !important;
+      padding: .4rem 1.2rem; border-radius: 999px;
+      font-size: .72rem !important;
+      transition: background .2s, transform .15s !important;
+    }
+    .nav-cta:hover { background: #148040 !important; transform: translateY(-1px); }
+
+    /* ── HR ── */
+    hr { border: none; border-top: 1px solid var(--rule); }
+
+    /* ── SECTION LABEL ── */
+    .label {
+      font-size: .67rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; margin-bottom: 2.5rem;
+    }
+    .label-green  { color: var(--green); }
+    .label-orange { color: var(--orange); }
+    .label-blue   { color: var(--blue); }
+    .label-purple { color: var(--purple); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--ink);
+      padding: 8rem 0 6rem;
+      position: relative; overflow: hidden;
+    }
+    /* decorative blobs */
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,122,74,.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: 10%;
+      width: 340px; height: 340px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(36,83,168,.28) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 260px;
+      gap: 4rem; align-items: center; position: relative; z-index: 1;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .73rem; color: rgba(255,255,255,.6); margin-bottom: 1.75rem;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      padding: .32rem .85rem; border-radius: 999px;
+    }
+    .hero-tag .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4dd68a; animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:.25; } }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      color: #fff; line-height: 1.08; letter-spacing: -.02em;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 em { font-style: italic; color: #4dd68a; }
+
+    .hero-bio {
+      font-size: .93rem; color: rgba(255,255,255,.6);
+      line-height: 1.82; margin-bottom: 2.25rem; max-width: 520px;
+    }
+    .hero-links { display: flex; gap: .85rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; background: var(--green); color: #fff;
+      font-size: .8rem; font-weight: 500; padding: .6rem 1.4rem;
+      border-radius: 999px; transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #148040; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block; font-size: .8rem; color: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.2); padding: .55rem 1.2rem;
+      border-radius: 999px; transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,.6); color: #fff; }
+
+    /* hero photo */
+    .hero-photo-wrap { position: relative; }
+    .hero-photo-wrap::before {
+      content: ''; position: absolute; inset: -12px; z-index: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(26,122,74,.4) 0%, rgba(36,83,168,.3) 100%);
+    }
+    .hero-photo {
+      position: relative; z-index: 1;
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border-radius: 8px; display: block;
+    }
+    .hero-photo-placeholder {
+      position: relative; z-index: 1;
+      width: 100%; aspect-ratio: 3/4;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: .5rem;
+    }
+    .hero-photo-placeholder .initials {
+      font-family: var(--serif); font-size: 4rem; color: #4dd68a; opacity: .5;
+    }
+    .hero-photo-placeholder .hint {
+      font-size: .72rem; color: rgba(255,255,255,.3); text-align: center; padding: 0 1rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-section { background: var(--green-bg); padding: 5rem 0; }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .about-text p { font-size: .93rem; color: #3a3a38; line-height: 1.82; margin-bottom: .9rem; }
+    .about-text p strong { color: var(--ink); font-weight: 500; }
+
+    /* edu inside about */
+    .edu-label {
+      font-size: .67rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem;
+    }
+    .edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .edu-item { padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,.08); }
+    .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .edu-top { display: flex; justify-content: space-between; align-items: flex-start; gap: .75rem; flex-wrap: wrap; margin-bottom: .25rem; }
+    .edu-school { font-size: .93rem; font-weight: 500; }
+    .edu-date {
+      font-size: .68rem; font-weight: 500; color: #fff;
+      background: var(--orange); padding: .15rem .6rem; border-radius: 999px; flex-shrink: 0;
+    }
+    .edu-deg { font-size: .845rem; color: var(--sub); margin-bottom: .35rem; }
+    .edu-courses { font-size: .78rem; color: var(--sub); line-height: 1.65; }
+    .edu-courses strong { color: var(--ink); font-weight: 500; }
+
+    /* ── SKILLS ── */
+    .skills-section { background: var(--bg); padding: 5rem 0; }
+    .skills-table { display: grid; grid-template-columns: 160px 1fr; }
+    .sk-row-cat {
+      font-size: .71rem; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem 1.1rem 0;
+      border-top: 1px solid var(--rule); align-self: center;
+    }
+    .sk-tags {
+      display: flex; flex-wrap: wrap; gap: .4rem;
+      padding: 1.1rem 0; border-top: 1px solid var(--rule);
+    }
+    .sk-tag {
+      font-size: .74rem; font-weight: 400;
+      border-radius: 4px; padding: .25rem .7rem;
+      transition: filter .15s, transform .1s; cursor: default;
+    }
+    .sk-tag:hover { filter: brightness(.92); transform: translateY(-1px); }
+    .sk-tag.g  { background: var(--green-bg);  color: var(--green);  border: 1px solid #b0dcbf; }
+    .sk-tag.o  { background: var(--orange-bg); color: var(--orange); border: 1px solid #f0c4a8; }
+    .sk-tag.b  { background: var(--blue-bg);   color: var(--blue);   border: 1px solid #afc3ed; }
+    .sk-tag.p  { background: var(--purple-bg); color: var(--purple); border: 1px solid #c9b0e8; }
+    .sk-tag.n  { background: #f2f2f0; color: var(--sub); border: 1px solid var(--rule); }
+
+    /* ── PROJECTS ── */
+    .projects-section { background: var(--blue-bg); padding: 5rem 0; }
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .proj-card {
+      background: #fff; border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.07);
+      padding: 1.6rem;
+      position: relative; overflow: hidden;
+      transition: box-shadow .22s, transform .22s;
+    }
+    .proj-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,.1); transform: translateY(-4px); }
+    /* bold top border per card */
+    .proj-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .proj-card.c1::before { background: var(--green); }
+    .proj-card.c2::before { background: var(--orange); }
+    .proj-card.c3::before { background: var(--blue); }
+    .proj-card.c4::before { background: var(--purple); }
+    .proj-card.c5::before { background: var(--green); }
+
+    .proj-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .65rem; }
+    .proj-title { font-size: .93rem; font-weight: 500; line-height: 1.3; }
+    .proj-num { font-family: var(--serif); font-size: .9rem; color: var(--rule); flex-shrink: 0; margin-left: .5rem; }
+    .proj-badge {
+      display: inline-block; font-size: .67rem; font-weight: 600;
+      padding: .18rem .6rem; border-radius: 999px; margin-bottom: .75rem;
+    }
+    .badge-python { background: var(--green-bg);  color: var(--green); }
+    .badge-r      { background: var(--blue-bg);   color: var(--blue);  }
+    .badge-sas    { background: var(--orange-bg); color: var(--orange); }
+    .badge-sql    { background: var(--purple-bg); color: var(--purple); }
+
+    .proj-desc { font-size: .835rem; color: var(--sub); line-height: 1.72; margin-bottom: .9rem; }
+    .proj-gh {
+      font-size: .74rem; font-weight: 500; color: var(--blue);
+      border-bottom: 1.5px solid var(--blue-bg);
+      display: inline-block; padding-bottom: 1px;
+      transition: border-color .15s;
+    }
+    .proj-gh:hover { border-color: var(--blue); }
+
+    /* ── EXPERIENCE ── */
+    .exp-section { background: var(--bg); padding: 5rem 0; }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      display: grid; grid-template-columns: 44px 1fr;
+      gap: 1.5rem; padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem;
+    }
+    .ic-green  { background: var(--green-bg);  }
+    .ic-orange { background: var(--orange-bg); }
+    .ic-blue   { background: var(--blue-bg);   }
+
+    .exp-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .exp-role { font-size: .95rem; font-weight: 500; }
+    .exp-date {
+      font-size: .7rem; font-weight: 500; color: #fff;
+      padding: .15rem .65rem; border-radius: 999px; flex-shrink: 0;
+    }
+    .date-green  { background: var(--green); }
+    .date-orange { background: var(--orange); }
+    .date-blue   { background: var(--blue); }
+
+    .exp-org { font-size: .82rem; color: var(--sub); margin-bottom: .7rem; }
+    .exp-bul { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .exp-bul li {
+      font-size: .855rem; color: var(--sub); line-height: 1.72;
+      padding-left: 1rem; position: relative;
+    }
+    .exp-bul li::before { content: '–'; position: absolute; left: 0; color: #ccc; }
+    .exp-bul li strong { color: var(--ink); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--ink); padding: 5rem 0; }
+    .contact-label { color: #4dd68a; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-note h3 {
+      font-family: var(--serif); font-size: 1.7rem;
+      color: #fff; margin-bottom: .85rem; letter-spacing: -.01em;
+    }
+    .contact-note p { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.8; }
+
+    .contact-links { display: flex; flex-direction: column; gap: .6rem; }
+    .clink {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .9rem 1rem; border-radius: 10px;
+      font-size: .875rem; color: #fff;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      transition: background .2s, border-color .2s, transform .15s;
+    }
+    .clink:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); transform: translateX(4px); }
+    .clink-label { display: flex; align-items: center; gap: .75rem; }
+    .clink-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; flex-shrink: 0;
+    }
+    .ci-email  { background: var(--orange-bg); }
+    .ci-li     { background: var(--blue-bg); }
+    .ci-gh     { background: rgba(255,255,255,.12); }
+    .ci-cv     { background: var(--green-bg); }
+    .clink-arr { color: rgba(255,255,255,.3); font-size: .75rem; transition: color .2s, transform .2s; }
+    .clink:hover .clink-arr { color: #fff; transform: translateX(3px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 1.75rem 0; }
+    footer .wrap { display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.35); }
+
+    /* ── REVEAL ── */
+    .r { opacity: 0; transform: translateY(16px); transition: opacity .52s ease, transform .52s ease; }
+    .r.in { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .wrap { padding: 0 2rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: none; }
+      .about-inner, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .proj-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 1.25rem; }
+      .skills-table { grid-template-columns: 1fr; }
+      .sk-row-cat { padding-bottom: .3rem; border-bottom: none; }
+      .sk-tags { border-top: none; padding-top: .35rem; }
+      .nav-links { gap: 1rem; }
+      .nav-cta { display: none; }
+    }
+  </style>
 </head>
 <body>
-Redirecting...
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-name">Sabun<span>.</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag"><span class="dot"></span> Data Analyst · Vermillion, South Dakota</div>
+        <h1>Hello, I'm<br><em>Sabun</em></h1>
+        <p class="hero-bio">
+          I'm a Business Analytics graduate student at the University of South Dakota with a background in Information Technology and Business Administration. With over five years of experience in digital marketing and e-commerce, I focus on turning data into actionable insights that support better decision-making.
+        </p>
+        <div class="hero-links">
+          <a href="mailto:sabundhital@gmail.com" class="btn-primary">Get in touch</a>
+          <a href="https://linkedin.com/in/sabundhital" target="_blank" rel="noopener" class="btn-outline">LinkedIn →</a>
+          <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="btn-outline">GitHub →</a>
+          <a href="https://drive.google.com/file/d/1VQFfMEy8xl-IUXdqOhW7iZ58kDgTUCh6/view?usp=sharing" class="btn-outline">Resume →</a>
+        </div>
+      </div>
+     <div class="hero-photo-wrap">
+  <img
+    class="hero-photo"
+    src="https://raw.githubusercontent.com/SabunDhital/SabunDhital.github.io/main/WhatsApp%20Image%202026-02-22%20at%206.58.00%20PM.jpeg"
+    alt="Sabun Dhital"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+  />
+  <div class="hero-photo-placeholder" style="display:none;">
+    <div class="placeholder-initials">SD</div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="wrap">
+    <div class="label label-green r">About</div>
+    <div class="about-inner">
+      <div class="about-text r">
+        <p>I'm a <strong>Business Analytics graduate student</strong> at the University of South Dakota with a background in Information Technology and Business Administration.</p>
+        <p>With over <strong>five years of experience</strong> in digital marketing and e-commerce, I have worked with campaign data, customer behavior, and performance metrics to improve business outcomes. I focus on turning data into actionable insights that support better decision-making.</p>
+        <p>My work combines business understanding and analytical tools such as <strong>SQL, R, Python, and data visualization</strong> to analyze problems, uncover trends, and deliver data-driven solutions.</p>
+      </div>
+      <div class="r">
+        <div class="edu-label">Education</div>
+        <div class="edu-list">
+          <div class="edu-item">
+            <div class="edu-top">
+              <div class="edu-school">University of South Dakota</div>
+              <span class="edu-date">Aug 2024 – Current</span>
+            </div>
+            <div class="edu-deg">Master's in Business Analytics · GPA 3.77</div>
+            <div class="edu-courses"><strong>Courses:</strong> Data Mining, Data Warehousing and Modeling, Business Analytics Modeling, Operational Analytics, Project Management</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-top">
+              <div class="edu-school">Westcliff University</div>
+              <span class="edu-date">Mar 2020 – Mar 2022</span>
+            </div>
+            <div class="edu-deg">Master's in Business Administration · GPA 3.75</div>
+            <div class="edu-courses"><strong>Courses:</strong> Data Analysis and Business Intelligence, Market Research, Business Research Methodology</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="wrap">
+    <div class="label label-blue r">Technical &amp; Professional Skills</div>
+    <div class="skills-table r">
+
+      <div class="sk-row-cat" style="color:var(--green);">Languages</div>
+      <div class="sk-tags">
+        <span class="sk-tag g">Python</span>
+        <span class="sk-tag g">R</span>
+        <span class="sk-tag g">SQL</span>
+        <span class="sk-tag g">SAS</span>
+      </div>
+
+      <div class="sk-row-cat" style="color:var(--blue);">Database and Warehouse</div>
+      <div class="sk-tags">
+        <span class="sk-tag b">MySQL</span>
+        <span class="sk-tag b">Relational Database Design</span>
+        <span class="sk-tag b">ETL</span>
+        <span class="sk-tag b">Data Modeling</span>
+      </div>
+
+      <div class="sk-row-cat" style="color:var(--purple);">Analytics & Statistical Methods</div>
+      <div class="sk-tags">
+        <span class="sk-tag p">Exploratory Data Analysis</span>
+        <span class="sk-tag p"> Predictive Analysis</span>
+        <span class="sk-tag p">Prescriptive Optimization</span>
+        <span class="sk-tag p">Time Series Forecasting</span>
+        <span class="sk-tag p">Text Analysis</span>
+      </div>
+
+      <div class="sk-row-cat" style="color:var(--orange);">Visualization and Business Intelligence</div>
+      <div class="sk-tags">
+        <span class="sk-tag o">Power BI</span>
+        <span class="sk-tag o">Tableau</span>
+       <span class="sk-tag o">Microsoft Excel</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="wrap">
+    <div class="label label-blue r">Projects</div>
+    <div class="proj-grid r">
+
+      <div class="proj-card c1">
+        <div class="proj-card-top">
+          <div class="proj-title">IBM Employee Attrition</div>
+          <div class="proj-num">01</div>
+        </div>
+        <span class="proj-badge badge-python">Python</span>
+        <p class="proj-desc">Executed machine learning attrition prediction model (80.3% ROC-AUC) using Python, SMOTE, and GridSearchCV, enabling HR to reduce turnover costs by identifying at-risk employees based on compensation and overtime patterns.</p>
+        <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="proj-gh">Github →</a>
+      </div>
+
+      <div class="proj-card c2">
+        <div class="proj-card-top">
+          <div class="proj-title">Airbnb Pricing Analytics</div>
+          <div class="proj-num">02</div>
+        </div>
+        <span class="proj-badge badge-sas">SAS</span>
+        <p class="proj-desc">Analyzed 351 Airbnb listings in Salem, Oregon and built LASSO, Decision Tree, and Random Forest models to predict listing prices. Identified room type, bedrooms, and bathrooms as key pricing factors.</p>
+        <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="proj-gh">Github →</a>
+      </div>
+
+      <div class="proj-card c3">
+        <div class="proj-card-top">
+          <div class="proj-title">Amazon Kindle Sentiment Analysis</div>
+          <div class="proj-num">03</div>
+        </div>
+        <span class="proj-badge badge-r">R</span>
+        <p class="proj-desc">Applied NLP techniques (tokenization, stemming, DTM) in R to analyze sentiment patterns across 12,000 customer reviews, identifying key emotional drivers of satisfaction and generating actionable recommendations.</p>
+        <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="proj-gh">Github →</a>
+      </div>
+
+      <div class="proj-card c4">
+        <div class="proj-card-top">
+          <div class="proj-title">Canyon Ranch Database Project</div>
+          <div class="proj-num">04</div>
+        </div>
+        <span class="proj-badge badge-sql">SQL</span>
+        <p class="proj-desc">Created SQL Server database and data warehouse for a luxury wellness resort with ER diagrams, relational schemas, and ETL pipelines to support reservations analytics and customer experience insights.</p>
+        <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="proj-gh">Github →</a>
+      </div>
+
+      <div class="proj-card c5">
+        <div class="proj-card-top">
+          <div class="proj-title">UnitedHealth Group Stock Forecasting</div>
+          <div class="proj-num">05</div>
+        </div>
+        <span class="proj-badge badge-r">R</span>
+        <p class="proj-desc">Analyzed 4 years of UNH stock data using time series techniques, building and evaluating ARIMA, ETS, and Random Walk models in R, selecting the optimal model based on RMSE, MAE, and MAPE to generate short-term forecasts.</p>
+        <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="proj-gh">Github →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="exp-section">
+  <div class="wrap">
+    <div class="label label-orange r">Experience</div>
+    <div class="exp-list r">
+
+      <div class="exp-item">
+        <div class="exp-icon ic-green">🔬</div>
+        <div>
+          <div class="exp-top">
+            <div class="exp-role">Graduate Research Assistant</div>
+            <span class="exp-date date-green">Aug 2025 – Current</span>
+          </div>
+          <div class="exp-org">University of South Dakota · Vermillion, South Dakota</div>
+          <ul class="exp-bul">
+            <li>Conducted retail sales forecasting on a large-scale dataset of <strong>42,000+ time series</strong> across 10 stores and 3,000+ products, applying advanced forecasting and ML techniques with hierarchical methods to improve predictive accuracy.</li>
+            <li>Built automated data pipelines and a <strong>Tableau dashboard</strong> to track forecasting model performance in real time, cutting manual reporting effort by <strong>5+ hours weekly</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-icon ic-blue">💼</div>
+        <div>
+          <div class="exp-top">
+            <div class="exp-role">Student Consultant</div>
+            <span class="exp-date date-blue">Aug 2025 – Current</span>
+          </div>
+          <div class="exp-org">Coyote Business Consulting · University of South Dakota</div>
+          <ul class="exp-bul">
+            <li>Developed a demand forecasting model across <strong>20+ product categories</strong> using 5 years of sales data for Charlie's Bookstore & Fan Shop, applying time series analysis to support Open-to-Buy planning.</li>
+            <li>Delivered a <strong>12-month data-driven marketing strategy</strong> for ISPMB, strengthening donor acquisition by <strong>10+ per month</strong> and growing social media engagement by <strong>8%</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-icon ic-orange">📊</div>
+        <div>
+          <div class="exp-top">
+            <div class="exp-role">Campaign Manager</div>
+            <span class="exp-date date-orange">Jan 2023 – Mar 2024</span>
+          </div>
+          <div class="exp-org">Daraz Nepal · Kathmandu, Nepal</div>
+          <ul class="exp-bul">
+            <li>Leveraged <strong>SQL and Excel</strong> to analyze performance across 10+ marketing campaigns, driving a <strong>30% lift in sales conversion</strong> through monthly trend and conversion analysis.</li>
+            <li>Evaluated market trends across social media, live streaming, and online platforms, expanding audience reach by <strong>25%</strong>.</li>
+            <li>Monitored campaign KPIs and ROI using <strong>Power BI dashboards</strong>, delivering weekly performance reports that guided data-driven strategy decisions.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="wrap">
+    <div class="label contact-label r">Get in touch</div>
+    <div class="contact-grid r">
+      <div class="contact-note">
+        <h3>Thank you for visiting my portfolio.</h3>
+        <p>I'm actively looking for Data Analyst roles. If you'd like to connect or have an opportunity to discuss, feel free to reach out — I'd love to hear from you.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:sabundhital@gmail.com" class="clink">
+          <span class="clink-label">
+            <span class="clink-icon ci-email">✉️</span>
+            sabundhital@gmail.com
+          </span>
+          <span class="clink-arr">→</span>
+        </a>
+        <a href="https://linkedin.com/in/sabundhital" target="_blank" rel="noopener" class="clink">
+          <span class="clink-label">
+            <span class="clink-icon ci-li">💼</span>
+            linkedin.com/in/sabundhital
+          </span>
+          <span class="clink-arr">→</span>
+        </a>
+        <a href="https://github.com/sabundhital" target="_blank" rel="noopener" class="clink">
+          <span class="clink-label">
+            <span class="clink-icon ci-gh">🐙</span>
+            GitHub
+          </span>
+          <span class="clink-arr">→</span>
+        </a>
+        <a href="#" class="clink">
+          <span class="clink-label">
+            <span class="clink-icon ci-cv">📄</span>
+            Resume (PDF)
+          </span>
+          <span class="clink-arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Sabun Dhital. All rights reserved.</span>
+    <span>Vermillion, South Dakota</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 10));
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 55);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
